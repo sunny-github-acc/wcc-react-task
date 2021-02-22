@@ -1,0 +1,29 @@
+@import "./variables";
+@import "./config";
+
+@mixin example($param) {
+    color: $param;
+}
+
+body {
+    background-image: url(https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);   
+    background-size: cover;                    
+    background-repeat: no-repeat;
+    background-position: center center;   
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+header {
+    @include setBackground($headerBackgroundFirst, $headerBackgroundSecond);
+    position: fixed;
+    height: 100px;
+    width: 100%;
+}
+footer {
+    @extend header;
+    color: $primaryButton;
+    &:hover {
+        @include example(red);
+    }
+}

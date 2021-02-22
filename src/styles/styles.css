@@ -1,0 +1,27 @@
+body {
+  background-image: url(https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+header, footer {
+  background: -webkit-gradient(linear, left top, right top, from(#db6826), to(#e92f00));
+  background: linear-gradient(to right, #db6826, #e92f00);
+  color: #fff;
+  position: fixed;
+  height: 100px;
+  width: 100%;
+}
+
+footer {
+  color: #1a1a1a;
+}
+
+footer:hover {
+  color: red;
+}
+/*# sourceMappingURL=styles.css.map */
