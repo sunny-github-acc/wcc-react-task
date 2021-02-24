@@ -1,27 +1,114 @@
+header, form, form label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 body {
   background-image: url(https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center center;
   height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-header, footer {
+header {
   background: -webkit-gradient(linear, left top, right top, from(#db6826), to(#e92f00));
   background: linear-gradient(to right, #db6826, #e92f00);
   color: #fff;
   position: fixed;
-  height: 100px;
+  height: 70px;
+  width: 90%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  border-top: 1px white solid;
+}
+
+header::after {
+  position: absolute;
+  display: inline-block;
+  top: 70px;
+  content: "";
+  height: calc(100vh - 70px);
+  width: 100%;
+  background-color: white;
+}
+
+form {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 93%;
+  height: 60%;
+}
+
+form label {
+  height: 100%;
+  width: 50px;
+}
+
+form label.label-input-text {
+  background: rgba(255, 255, 255, 0.226);
+  padding: 1px;
+  border-radius: 2px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+form label.label-submit {
+  background: white;
+  padding: 1px;
+  border-radius: 2px;
+}
+
+form label .movie {
+  fill: white;
+  height: 60%;
   width: 100%;
 }
 
-footer {
-  color: #1a1a1a;
+form label .search {
+  height: 70%;
+  color: #db6826;
 }
 
-footer:hover {
-  color: red;
+form .input-text {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  background: rgba(255, 255, 255, 0.226);
+  margin-right: 3px;
+  border: none;
+  border-radius: 2px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+form .input-text::-webkit-input-placeholder {
+  color: white;
+  font-weight: 700;
+}
+
+form .input-text:-ms-input-placeholder {
+  color: white;
+  font-weight: 700;
+}
+
+form .input-text::-ms-input-placeholder {
+  color: white;
+  font-weight: 700;
+}
+
+form .input-text::placeholder {
+  color: white;
+  font-weight: 700;
 }
 /*# sourceMappingURL=styles.css.map */
