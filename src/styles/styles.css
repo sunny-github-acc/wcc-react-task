@@ -1,4 +1,4 @@
-header, form, form label {
+header, form, form label.label-submit {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -53,31 +53,80 @@ form {
 form label {
   height: 100%;
   width: 50px;
+  padding: 1px;
+  border-radius: 2px;
 }
 
 form label.label-input-text {
   background: rgba(255, 255, 255, 0.226);
-  padding: 1px;
-  border-radius: 2px;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
 form label.label-submit {
   background: white;
-  padding: 1px;
-  border-radius: 2px;
+}
+
+form label.label-submit.no-display {
+  display: none;
 }
 
 form label .movie {
-  fill: white;
-  height: 60%;
+  position: relative;
   width: 100%;
+  height: 70%;
+  top: 15%;
+  fill: white;
+}
+
+form label .placeholder {
+  position: relative;
+  font-weight: 700;
+  display: inline-block;
+  left: 55px;
+  top: -20px;
+  width: 200px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: text;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+form label .placeholder.active .movie {
+  width: 0;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+form label .placeholder.passive {
+  font-size: 10px;
+  color: #b4b4b4;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+form label .placeholder.passive .movie {
+  height: 20px;
+  width: 20px;
+  fill: black;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+form label .placeholder.passive .text {
+  position: relative;
+  display: inline;
+  padding-left: 11px;
+  top: 5px;
 }
 
 form label .search {
   height: 70%;
   color: #db6826;
+  cursor: pointer;
 }
 
 form .input-text {
@@ -86,29 +135,30 @@ form .input-text {
   outline: none;
   background: rgba(255, 255, 255, 0.226);
   margin-right: 3px;
+  padding-left: 35px;
   border: none;
   border-radius: 2px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
 
-form .input-text::-webkit-input-placeholder {
-  color: white;
-  font-weight: 700;
+form .input-text.passive {
+  background: white;
+  border-radius: 2px;
+  heights: 1000px;
 }
 
-form .input-text:-ms-input-placeholder {
-  color: white;
-  font-weight: 700;
+form .container.movies.active {
+  display: none;
 }
 
-form .input-text::-ms-input-placeholder {
-  color: white;
-  font-weight: 700;
-}
-
-form .input-text::placeholder {
-  color: white;
-  font-weight: 700;
+form .container.movies.passive {
+  position: absolute;
+  width: calc(93% - 50px);
+  top: 50px;
+  left: 71px;
+  height: 100px;
+  background: white;
+  color: black;
 }
 /*# sourceMappingURL=styles.css.map */
