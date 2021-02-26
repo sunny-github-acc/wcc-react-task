@@ -7,6 +7,7 @@
     justify-content: center;
 }
 body {
+    font-family: Helvetica, sans-serif;
     background-image: url(https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);   
     background-size: cover;            
     background-position: center center;   
@@ -20,6 +21,7 @@ header {
     position: fixed;
     height: 70px;
     width: 90%;
+    min-width: 320px;
     left: 50%;
     transform: translate(-50%, 0);
     border-top: 1px white solid;
@@ -30,32 +32,25 @@ header {
         content: "";
         height: calc(100vh - 70px);
         width: 100%;
-        background-color: white
+        background-color: white;
+        z-index: -1;
     }
 }
 form {
     @extend %flex;
     justify-content: space-between;
     width: 93%;
-    height: 60%;
+    height: $formHeight;
     label {
         height: 100%;
         width: 50px;
-        padding: 1px;
         border-radius: 2px;
-        &.label-input-text {
-            background: $transparentWhite;
-            border-bottom-right-radius: 0;
-            border-top-right-radius: 0;
-        }
-        &.label-submit {
-            @extend %flex;
-            background: white;
-            &.no-display {
-                display: none;
-            }
-        }
-        .movie {
+    }
+    .label-input-text {
+        background: $transparentWhite;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        .movie-logo {
             position: relative;
             width: 100%;
             height: 70%;
@@ -65,72 +60,125 @@ form {
         .placeholder {
             position: relative;
             font-weight: 700;
+            font-size: 14px;
             display: inline-block;
-            left: 55px;
+            left: 50px;
             top: -20px;
             width: 200px;
             user-select: none;
             cursor: text;
             transition: all .3s;
-            &.active {
-                .movie {
-                    width: 0;
+            z-index: 1;
+            &.focused {
+                font-size: 11px;
+                color: $lightGrey;
+                left: 99px;
+                top: -10px;
+                transition: all .3s;
+            }
+        }
+    }
+    .container-input-movies {
+        width: 100%;
+        align-self: flex-start;
+        &.focused {
+            @extend %flex;
+            flex-flow: column wrap;
+            align-content: flex-start;
+            align-items: flex-start;
+            justify-content: flex-end
+        }
+        .container-input-text {
+            @extend %flex;
+            width: 99.5%;
+            flex: 1;
+            &.focused {
+                background: white;
+                position: relative;
+                top: -9px;
+                padding-top: 5px;
+                padding-bottom: 4px;
+                border-radius: 2px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.178);
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+            .movie-logo {
+                width: 0;
+                height: $formHeight;
+                fill: $lightenBlack;
+                background: $transparentWhite;
+                transition: all .3s;
+                &.focused {
+                    width: 20px;
+                    padding-left: 15px;
+                    padding-right: 15px;
                     transition: all .3s;
                 }
             }
-            &.passive {
-                font-size: 10px;
-                color: $lightGrey;
-                transition: all .3s;
-                .movie {
-                    height: 20px;
-                    width: 20px;
-                    fill: black;
-                    transition: all .3s;
-                }
-                .text {
-                    position: relative;
-                    display: inline;
-                    padding-left: 11px;
-                    top: 5px;
+            .input-text {
+                color: transparent;
+                width: 100%;
+                height: $formHeight;
+                outline: none;
+                font-weight: 700;
+                font-size: 15px;
+                font-family: sans-serif;
+                background: $transparentWhite;
+                padding: 0; 
+                border: none;
+                border-radius: 2px;
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+                &.focused {
+                    color: $lightenBlack;
+                    background: white;
+                    border-radius: 2px;
+                    
                 }
             }
         }
-        .search {
+        .movie-titles {
+            display: none;
+            flex: 1;
+            position: relative;
+            top: -9px;
+            width: calc(99.5% - 50px);
+            padding-left: 50px;
+            background-color: white;
+            color: $lightenBlack;
+            box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.575);
+            transition: all 1.3s;
+            &.focused {
+                display: unset;
+            }
+            h3 {
+                font-family: sans-serif;
+                font-size: 15px;
+                font-weight: 700;
+                margin-top: 10px;
+                margin-bottom: 0;
+            }
+            h5 {
+                font-familyss: Courier;
+                margin-top: 0px;
+                margin-bottom: 10px;
+                color: darken($lightGrey, 20%);
+                font-weight: 500;
+                font-size: 11px;
+            }
+        }
+    }    
+    .label-submit {
+        @extend %flex;
+        background: white;
+        &.no-display {
+            display: none;
+        }
+        .search-logo {
             height: 70%;
             color: $lightOrange;
             cursor: pointer;
-        }
-    }
-    .input-text {
-        width: 100%;
-        height: 100%;
-        outline: none;
-        background: $transparentWhite;
-        margin-right: 3px;
-        padding-left: 35px;
-        border: none;
-        border-radius: 2px;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-        &.passive {
-            background: white;
-            border-radius: 2px;
-            heights: 1000px;
-        }
-    }
-    .container.movies {
-        &.active {
-            display: none;
-        }
-        &.passive {
-            position: absolute;
-            width: calc(93% - 50px);
-            top: 50px;
-            left: 71px;
-            height: 100px;
-            background: white;
-            color: black;
         }
     }
 }

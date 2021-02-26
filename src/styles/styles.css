@@ -1,4 +1,4 @@
-header, form, form label.label-submit {
+header, form, form .container-input-movies.focused, form .container-input-movies .container-input-text, form .label-submit {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,6 +11,7 @@ header, form, form label.label-submit {
 }
 
 body {
+  font-family: Helvetica, sans-serif;
   background-image: url(https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
   background-size: cover;
   background-position: center center;
@@ -26,6 +27,7 @@ header {
   position: fixed;
   height: 70px;
   width: 90%;
+  min-width: 320px;
   left: 50%;
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
@@ -40,6 +42,7 @@ header::after {
   height: calc(100vh - 70px);
   width: 100%;
   background-color: white;
+  z-index: -1;
 }
 
 form {
@@ -47,31 +50,22 @@ form {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 93%;
-  height: 60%;
+  height: 40px;
 }
 
 form label {
   height: 100%;
   width: 50px;
-  padding: 1px;
   border-radius: 2px;
 }
 
-form label.label-input-text {
+form .label-input-text {
   background: rgba(255, 255, 255, 0.226);
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
-form label.label-submit {
-  background: white;
-}
-
-form label.label-submit.no-display {
-  display: none;
-}
-
-form label .movie {
+form .label-input-text .movie-logo {
   position: relative;
   width: 100%;
   height: 70%;
@@ -79,11 +73,12 @@ form label .movie {
   fill: white;
 }
 
-form label .placeholder {
+form .label-input-text .placeholder {
   position: relative;
   font-weight: 700;
+  font-size: 14px;
   display: inline-block;
-  left: 55px;
+  left: 50px;
   top: -20px;
   width: 200px;
   -webkit-user-select: none;
@@ -93,72 +88,146 @@ form label .placeholder {
   cursor: text;
   -webkit-transition: all .3s;
   transition: all .3s;
+  z-index: 1;
 }
 
-form label .placeholder.active .movie {
-  width: 0;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-}
-
-form label .placeholder.passive {
-  font-size: 10px;
+form .label-input-text .placeholder.focused {
+  font-size: 11px;
   color: #b4b4b4;
+  left: 99px;
+  top: -10px;
   -webkit-transition: all .3s;
   transition: all .3s;
 }
 
-form label .placeholder.passive .movie {
-  height: 20px;
-  width: 20px;
-  fill: black;
-  -webkit-transition: all .3s;
-  transition: all .3s;
-}
-
-form label .placeholder.passive .text {
-  position: relative;
-  display: inline;
-  padding-left: 11px;
-  top: 5px;
-}
-
-form label .search {
-  height: 70%;
-  color: #db6826;
-  cursor: pointer;
-}
-
-form .input-text {
+form .container-input-movies {
   width: 100%;
-  height: 100%;
-  outline: none;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+form .container-input-movies.focused {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+form .container-input-movies .container-input-text {
+  width: 99.5%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+form .container-input-movies .container-input-text.focused {
+  background: white;
+  position: relative;
+  top: -9px;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  border-radius: 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.178);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+form .container-input-movies .container-input-text .movie-logo {
+  width: 0;
+  height: 40px;
+  fill: #383838;
   background: rgba(255, 255, 255, 0.226);
-  margin-right: 3px;
-  padding-left: 35px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+form .container-input-movies .container-input-text .movie-logo.focused {
+  width: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+form .container-input-movies .container-input-text .input-text {
+  color: transparent;
+  width: 100%;
+  height: 40px;
+  outline: none;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: sans-serif;
+  background: rgba(255, 255, 255, 0.226);
+  padding: 0;
   border: none;
   border-radius: 2px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
 
-form .input-text.passive {
+form .container-input-movies .container-input-text .input-text.focused {
+  color: #383838;
   background: white;
   border-radius: 2px;
-  heights: 1000px;
 }
 
-form .container.movies.active {
+form .container-input-movies .movie-titles {
+  display: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  position: relative;
+  top: -9px;
+  width: calc(99.5% - 50px);
+  padding-left: 50px;
+  background-color: white;
+  color: #383838;
+  -webkit-box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.575);
+          box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.575);
+  -webkit-transition: all 1.3s;
+  transition: all 1.3s;
+}
+
+form .container-input-movies .movie-titles.focused {
+  display: unset;
+}
+
+form .container-input-movies .movie-titles h3 {
+  font-family: sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+form .container-input-movies .movie-titles h5 {
+  font-familyss: Courier;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  color: #818181;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+form .label-submit {
+  background: white;
+}
+
+form .label-submit.no-display {
   display: none;
 }
 
-form .container.movies.passive {
-  position: absolute;
-  width: calc(93% - 50px);
-  top: 50px;
-  left: 71px;
-  height: 100px;
-  background: white;
-  color: black;
+form .label-submit .search-logo {
+  height: 70%;
+  color: #db6826;
+  cursor: pointer;
 }
 /*# sourceMappingURL=styles.css.map */
