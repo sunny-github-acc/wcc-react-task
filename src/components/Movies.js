@@ -1,28 +1,19 @@
-import { useState } from 'react'
 import Movie from "./Movie"
 
-const ServerMovies = ({ className, search }) => {
-    const [movies, setMovies] = useState([]);
-
-    const fetchMovies = async () => {
-        const result = await fetch("https://api.themoviedb.org/3/search/movie?api_key=7e9221d5edd3d84c33957b05bcec9848&language=en-US&query=" + search);
-        const data = await result.json();
-
-        setMovies(data.results);
-        console.log('data.results', data.results)
-    }
-    
-    
-    if (search.length > 2) fetchMovies();
-
+const ServerMovies = ({ classTitle, movies, handleMovieClick }) => {
+    console.log('movies', movies == "")
+    if (movies == "") movies = ["We looked everywhere but couldn't find your movie"];
     return (
-        <div className={className}>
+        <div className={classTitle}>
             {movies.map((movie, index) => {
-                if (index < 9) {
-                    <Movie movie={movie} />
+                if (index < 8) {
+                    return <Movie 
+                                movie={movie} 
+                                key={movie.id || 1} 
+                                id={movie.id || 1} 
+                                handleMovieClick={handleMovieClick}/>
                 }
-            })
-            }
+            })}
         </div>
     )
 }

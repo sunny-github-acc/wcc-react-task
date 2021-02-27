@@ -80,12 +80,14 @@ form .label-input-text .placeholder {
   display: inline-block;
   left: 50px;
   top: -20px;
-  width: 200px;
+  max-width: 60vw;
+  overflow: hidden;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   cursor: text;
+  white-space: nowrap;
   -webkit-transition: all .3s;
   transition: all .3s;
   z-index: 1;
@@ -179,39 +181,63 @@ form .container-input-movies .container-input-text .input-text.focused {
   border-radius: 2px;
 }
 
+form .container-input-movies .container-input-text .input-text::-moz-selection {
+  -moz-user-select: none;
+       user-select: none;
+}
+
+form .container-input-movies .container-input-text .input-text::selection {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 form .container-input-movies .movie-titles {
   display: none;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  position: relative;
-  top: -9px;
-  width: calc(99.5% - 50px);
-  padding-left: 50px;
+  width: calc(99.5%);
   background-color: white;
   color: #383838;
   -webkit-box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.575);
           box-shadow: 0px 1px 3px rgba(128, 128, 128, 0.575);
-  -webkit-transition: all 1.3s;
-  transition: all 1.3s;
+  position: relative;
+  top: -9px;
 }
 
 form .container-input-movies .movie-titles.focused {
   display: unset;
 }
 
+form .container-input-movies .movie-titles .movie {
+  cursor: pointer;
+}
+
+form .container-input-movies .movie-titles .movie:hover {
+  background: #e7e7e7;
+}
+
 form .container-input-movies .movie-titles h3 {
   font-family: sans-serif;
   font-size: 15px;
   font-weight: 700;
-  margin-top: 10px;
-  margin-bottom: 0;
+  margin: 0;
+  padding-left: 50px;
+  padding-top: 15px;
+  padding-bottom: 0;
+}
+
+form .container-input-movies .movie-titles h3.not-found {
+  padding-bottom: 15px;
 }
 
 form .container-input-movies .movie-titles h5 {
-  font-familyss: Courier;
-  margin-top: 0px;
-  margin-bottom: 10px;
+  margin: 0;
+  padding-left: 50px;
+  padding-top: 0px;
+  padding-bottom: 10px;
   color: #818181;
   font-weight: 500;
   font-size: 11px;
@@ -221,7 +247,7 @@ form .label-submit {
   background: white;
 }
 
-form .label-submit.no-display {
+form .label-submit.focused {
   display: none;
 }
 
