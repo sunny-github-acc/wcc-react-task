@@ -1,8 +1,9 @@
 import Movie from "./Movie"
 
 const ServerMovies = ({ classTitle, movies, handleMovieClick }) => {
-    console.log('movies', movies == "")
     if (movies == "") movies = ["We looked everywhere but couldn't find your movie"];
+    else if (movies === undefined) movies = [""];
+    
     return (
         <div className={classTitle}>
             {movies.map((movie, index) => {

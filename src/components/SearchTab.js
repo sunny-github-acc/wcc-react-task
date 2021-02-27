@@ -7,7 +7,7 @@ const SearchTab = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputStateValue, setInputValue] = useState("");
   const [placeholderStateValue, setPlaceholderValue] = useState("Enter a movie name");
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState();
   
   const handleFocus = () => {
     setIsInputFocused(true);
@@ -21,6 +21,8 @@ const SearchTab = () => {
     inputStateValue ? 
       setPlaceholderValue(inputStateValue) : 
       setPlaceholderValue("Enter a movie name");
+      
+    window.getSelection().removeAllRanges();
   }
 
   const handleChange = (e) => {
@@ -32,7 +34,7 @@ const SearchTab = () => {
   }
 
   const getMovies = async (input) => {
-    let movies = [" "];
+    let movies;
     
     if (input.length > 2) movies = await fetchMovies(input);
     

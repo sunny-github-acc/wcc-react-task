@@ -181,18 +181,6 @@ form .container-input-movies .container-input-text .input-text.focused {
   border-radius: 2px;
 }
 
-form .container-input-movies .container-input-text .input-text::-moz-selection {
-  -moz-user-select: none;
-       user-select: none;
-}
-
-form .container-input-movies .container-input-text .input-text::selection {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
 form .container-input-movies .movie-titles {
   display: none;
   -webkit-box-flex: 1;
