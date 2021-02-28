@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from "react"
+import { debounce } from "lodash"
 import { ReactComponent as SearchLogo } from '../icons/search.svg'
 import { ReactComponent as MovieLogo } from '../icons/movie.svg'
 import Movies from "./Movies"
@@ -8,6 +9,8 @@ const SearchTab = () => {
   const [inputStateValue, setInputValue] = useState("");
   const [placeholderStateValue, setPlaceholderValue] = useState("Enter a movie name");
   const [movies, setMovies] = useState();
+  let inputState = isInputFocused ? "focused" : "not-focused";
+  let placeholderValue = placeholderStateValue;
   
   const handleFocus = () => {
     setIsInputFocused(true);
@@ -30,9 +33,9 @@ const SearchTab = () => {
 
     setInputValue(input);
 
-    getMovies(input);
+    handleMovies(input);
   }
-
+  
   const getMovies = async (input) => {
     let movies;
     
@@ -48,14 +51,15 @@ const SearchTab = () => {
     return data.results;
   }
 
+  const handleMovies = useCallback(debounce((input) => getMovies(input), 300), []);
+  
   const handleMovieClick = (e) => {
-    const selectedMovie = e.target.closest(".movie").querySelector("h3").innerHTML;
+    const selectedMovie = e.target.closest(".movie").querySelector("h3").innerText;
 
     setInputValue(selectedMovie);
-  }
 
-  let inputState = isInputFocused ? "focused" : "not-focused";
-  let placeholderValue = placeholderStateValue;
+    getMovies(selectedMovie);
+  }
 
   return (
     <form action="#">

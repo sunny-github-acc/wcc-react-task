@@ -64,7 +64,8 @@ form {
             display: inline-block;
             left: 50px;
             top: -20px;
-            max-width: 60vw;
+            max-width: calc((90vw * .93) - 100px);
+            min-width: 200px;
             overflow: hidden;
             user-select: none;
             cursor: text;
@@ -87,8 +88,6 @@ form {
             @extend %flex;
             flex-flow: column wrap;
             align-content: flex-start;
-            align-items: flex-start;
-            justify-content: flex-end
         }
         .container-input-text {
             @extend %flex;
@@ -136,9 +135,6 @@ form {
                     color: $lightenBlack;
                     background: white;
                     border-radius: 2px;
-                }
-                &::selection {
-                    // user-select: none;
                 }
             }
         }

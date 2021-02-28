@@ -80,7 +80,8 @@ form .label-input-text .placeholder {
   display: inline-block;
   left: 50px;
   top: -20px;
-  max-width: 60vw;
+  max-width: calc((90vw * .93) - 100px);
+  min-width: 200px;
   overflow: hidden;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -115,12 +116,6 @@ form .container-input-movies.focused {
           flex-flow: column wrap;
   -ms-flex-line-pack: start;
       align-content: flex-start;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
 }
 
 form .container-input-movies .container-input-text {
