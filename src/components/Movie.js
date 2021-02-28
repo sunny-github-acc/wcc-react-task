@@ -3,7 +3,8 @@ const Movie = ({ movie, id, handleMovieClick }) => {
     else return (
         <div id={id} className="movie" onMouseDown={handleMovieClick}>
             <h3>{movie.original_title}</h3>
-            <h5>{movie.vote_average} Rating, {movie.release_date.slice(0, 4)}</h5>
+            <h5>{movie.vote_average} Rating, 
+                {movie.release_date ? movie.release_date.slice(0, 4) : ""}</h5>
         </div>
     )
 }

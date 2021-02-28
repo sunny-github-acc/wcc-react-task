@@ -45,13 +45,17 @@ const SearchTab = () => {
   }
   
   const fetchMovies = async (input) => {
-    const result = await fetch("https://api.themoviedb.org/3/search/movie?api_key=7e9221d5edd3d84c33957b05bcec9848&language=en-US&query=" + input);
-    const data = await result.json();
-
-    return data.results;
+    try {
+      const result = await fetch("https://api.themoviedb.org/3/search/movie?api_key=7e9221d5edd3d84c33957b05bcec9848&language=en-US&query=" + input);
+      const data = await result.json();
+  
+      return data.results;
+    } catch(error) {
+      console.log(error);
+    }
   }
 
-  const handleMovies = useCallback(debounce((input) => getMovies(input), 300), []);
+  const handleMovies = useCallback(debounce((input) => getMovies(input), 200), []);
   
   const handleMovieClick = (e) => {
     const selectedMovie = e.target.closest(".movie").querySelector("h3").innerText;
@@ -67,6 +71,7 @@ const SearchTab = () => {
         <MovieLogo className="movie-logo" />
         <span className={`placeholder ${inputState}`}>{placeholderValue}</span>
       </label>
+
       <div className={`container-input-movies ${inputState}`}>
         <div className={`container-input-text ${inputState}`}>
           <MovieLogo className={`movie-logo ${inputState}`} />
