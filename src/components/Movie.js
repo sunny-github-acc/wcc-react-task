@@ -1,5 +1,5 @@
 const Movie = ({ movie, id, handleMovieClick }) => {
-    if (movie.original_title === undefined) return <h3 className="not-found">{movie}</h3>
+    if (!movie.original_title) return <h3 className="not-found">{movie}</h3>
     else return (
         <div id={id} className="movie" onMouseDown={handleMovieClick}>
             <h3>{movie.original_title}</h3>
