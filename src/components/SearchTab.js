@@ -1,83 +1,35 @@
-import { useState, useCallback } from "react"
-import { debounce } from "lodash"
+import { useState } from "react"
 import { ReactComponent as SearchLogo } from '../icons/search.svg'
 import { ReactComponent as MovieLogo } from '../icons/movie.svg'
 import Movies from "./Movies"
+import useFetch from "../hooks/useFetch"
 
 const SearchTab = () => {
+  const [inputValue, setInputValue] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const [inputStateValue, setInputValue] = useState("");
-  const [placeholderStateValue, setPlaceholderValue] = useState("Enter a movie name");
-  const [movies, setMovies] = useState(false);
-  const [isPending, setIsPending] = useState(null);
-  const [error, setError] = useState(null);
+  const [placeholderValue, setPlaceholderValue] = useState("Enter a movie name");
+  const { error, isPending, data: movies } = useFetch(inputValue);
+  const defaultPlaceholder = "Enter a movie name";
   let inputState = isInputFocused ? "focused" : "not-focused";
-  let placeholderValue = placeholderStateValue;
   
   const handleFocus = () => {
     setIsInputFocused(true);
-
-    setPlaceholderValue("Enter a movie name");
+    setPlaceholderValue(defaultPlaceholder);
   }
 
   const handleBlur = () => {
     setIsInputFocused(false);
 
-    inputStateValue ? 
-      setPlaceholderValue(inputStateValue) : 
-      setPlaceholderValue("Enter a movie name");
+    inputValue ? 
+      setPlaceholderValue(inputValue) : 
+      setPlaceholderValue(defaultPlaceholder);
       
     window.getSelection().removeAllRanges();
   }
-
-  const handleChange = (e) => {
-    let input = e.target.value; 
-
-    setInputValue(input);
-
-    handleMovies(input);
-  }
-  
-  const getMovies = async (input) => {
-    let movies = false;
-
-    setError(null);
-    
-    if (input.length > 2) {
-      let timeout = setTimeout(() => {
-        setIsPending(true);
-      }, 500); 
-
-      movies = await fetchMovies(input);
-
-      clearTimeout(timeout);
-      setIsPending(false);
-    }
-    
-    setMovies(movies); 
-  }
-  
-  const fetchMovies = async (input) => {
-    try {
-      const result = await fetch("https://api.themoviedb.org/3/search/movie?api_key=7e9221d5edd3d84c33957b05bcec9848&language=en-US&query=" + input);
-      const data = await result.json();
-
-      if (data.results == "") return [""];
-      
-      return data.results;
-    } catch(error) {
-        setError(error.message);
-    }
-  }
-
-  const handleMovies = useCallback(debounce((input) => getMovies(input), 200), []);
   
   const handleMovieClick = (e) => {
-    const selectedMovie = e.target.closest(".movie").querySelector("h3").innerText;
-
-    setInputValue(selectedMovie);
-
-    getMovies(selectedMovie);
+    const selectedMovie = e.target.closest(".movie").querySelector(".movie-title");
+    if (selectedMovie) setInputValue(selectedMovie.innerText);
   }
 
   return (
@@ -92,8 +44,8 @@ const SearchTab = () => {
           <MovieLogo className={`movie-logo ${inputState}`} />
           <input type="text" id="search" name="search" autoComplete="off"
             className={`input-text ${inputState}`}
-            onChange={(e) => handleChange(e)}
-            value={inputStateValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            value={inputValue}
             onFocus={handleFocus}
             onBlur={handleBlur} />
         </div>
@@ -102,7 +54,7 @@ const SearchTab = () => {
           movies={movies}
           isPending={isPending}
           error={error}
-          input={inputStateValue}
+          input={inputValue}
           handleMovieClick={handleMovieClick} />
       </div>
 
@@ -113,10 +65,5 @@ const SearchTab = () => {
     </form>
   )
 }
-
-// Header.propTypes = {
-//   title: PropTypes.string.isRequired,
-// }
-
 
 export default SearchTab

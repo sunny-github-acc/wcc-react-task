@@ -1,6 +1,6 @@
 import Movie from "./Movie"
 
-const ServerMovies = ({ classTitle, movies, isPending, error, handleMovieClick }) => {
+const ServerMovies = ({ movies, isPending, error, classTitle, handleMovieClick }) => {
     return (
         <div className={classTitle}>
             {isPending && <h3 className="pending">Intensly looking for movies...</h3>}
