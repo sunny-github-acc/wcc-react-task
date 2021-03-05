@@ -32,8 +32,12 @@ const SearchTab = () => {
     if (selectedMovie) setInputValue(selectedMovie.innerText);
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
-    <form action="#">
+    <form onSubmit={handleSubmit}>
       <label htmlFor="search" className="label-input-text">
         <MovieLogo className="movie-logo" />
         <span className={`placeholder ${inputState}`}>{placeholderValue}</span>
