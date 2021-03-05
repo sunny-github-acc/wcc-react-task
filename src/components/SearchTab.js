@@ -8,7 +8,9 @@ const SearchTab = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputStateValue, setInputValue] = useState("");
   const [placeholderStateValue, setPlaceholderValue] = useState("Enter a movie name");
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState(false);
+  const [isPending, setIsPending] = useState(null);
+  const [error, setError] = useState(null);
   let inputState = isInputFocused ? "focused" : "not-focused";
   let placeholderValue = placeholderStateValue;
   
@@ -37,9 +39,20 @@ const SearchTab = () => {
   }
   
   const getMovies = async (input) => {
-    let movies;
+    let movies = false;
+
+    setError(null);
     
-    if (input.length > 2) movies = await fetchMovies(input);
+    if (input.length > 2) {
+      let timeout = setTimeout(() => {
+        setIsPending(true);
+      }, 500); 
+
+      movies = await fetchMovies(input);
+
+      clearTimeout(timeout);
+      setIsPending(false);
+    }
     
     setMovies(movies); 
   }
@@ -48,10 +61,12 @@ const SearchTab = () => {
     try {
       const result = await fetch("https://api.themoviedb.org/3/search/movie?api_key=7e9221d5edd3d84c33957b05bcec9848&language=en-US&query=" + input);
       const data = await result.json();
-  
+
+      if (data.results == "") return [""];
+      
       return data.results;
     } catch(error) {
-      console.log(error);
+        setError(error.message);
     }
   }
 
@@ -85,6 +100,8 @@ const SearchTab = () => {
         <Movies 
           classTitle={`movie-titles ${inputState}`}
           movies={movies}
+          isPending={isPending}
+          error={error}
           input={inputStateValue}
           handleMovieClick={handleMovieClick} />
       </div>

@@ -1,12 +1,10 @@
 import Movie from "./Movie"
 
-const ServerMovies = ({ classTitle, movies, handleMovieClick }) => {
-    if (movies == "") movies = ["We looked everywhere but couldn't find your movie"];
-    else if (movies === undefined) movies = [""];
-    
+const ServerMovies = ({ classTitle, movies, isPending, error, handleMovieClick }) => {
     return (
         <div className={classTitle}>
-            {movies.map((movie, index) => {
+            {isPending && <h3 className="pending">Intensly looking for movies...</h3>}
+            {movies && movies.map((movie, index) => {
                 if (index < 8) {
                     return <Movie 
                                 movie={movie} 
@@ -15,6 +13,8 @@ const ServerMovies = ({ classTitle, movies, handleMovieClick }) => {
                                 handleMovieClick={handleMovieClick}/>
                 }
             })}
+            {!movies && !error && <h3 className="not-found"></h3>}
+            {error && <h3 className="error">{error}</h3>}
         </div>
     )
 }

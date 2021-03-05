@@ -1,10 +1,13 @@
 const Movie = ({ movie, id, handleMovieClick }) => {
-    if (!movie.original_title) return <h3 className="not-found">{movie}</h3>
-    else return (
+    return (
         <div id={id} className="movie" onMouseDown={handleMovieClick}>
-            <h3>{movie.original_title}</h3>
-            <h5>{movie.vote_average} Rating, 
-                {movie.release_date ? movie.release_date.slice(0, 4) : ""}</h5>
+            {movie.original_title && 
+                <><h3>{movie.original_title}</h3>
+                <h5>{movie.vote_average} Rating, 
+                    {movie.release_date && movie.release_date.slice(0, 4)}</h5></>}
+
+            {!movie.original_title && 
+                <h3 className="not-found">We looked everywhere but couldn't find your movie</h3>}
         </div>
     )
 }

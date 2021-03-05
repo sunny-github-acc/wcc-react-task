@@ -212,7 +212,7 @@ form .container-input-movies .movie-titles h3 {
   padding-bottom: 0;
 }
 
-form .container-input-movies .movie-titles h3.not-found {
+form .container-input-movies .movie-titles h3.not-found, form .container-input-movies .movie-titles h3.error, form .container-input-movies .movie-titles h3.pending {
   padding-bottom: 15px;
 }
 

@@ -164,7 +164,7 @@ form {
                 padding-left: 50px;
                 padding-top: 15px;
                 padding-bottom: 0;
-                &.not-found {
+                &.not-found, &.error, &.pending {
                     padding-bottom: 15px;
                 }
             }
