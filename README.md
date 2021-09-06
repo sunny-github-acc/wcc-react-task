@@ -2,8 +2,7 @@
 
 This app enables users to enter desired movie title into the search input box. It then displays a list of movies fetched from the database. 
 
-## Presentation
-<img src="https://user-images.githubusercontent.com/54981869/132190679-47d0d8d0-a86f-4e06-82ad-292eed494f31.jpg" width=50% height=50%>
+## Presentation 
 
 ![](https://user-images.githubusercontent.com/54981869/132192298-8a12714b-aae7-433b-bf6b-d05f9b4e4fce.gif)
 
