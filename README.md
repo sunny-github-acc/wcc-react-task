@@ -1,4 +1,4 @@
-# We Can Code Academy task
+# We Can Code Academy Task
 
 This app enables users to enter desired movie title into the search input box. It then displays a list of movies fetched from the database. 
 
